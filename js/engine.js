@@ -95,6 +95,11 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
+        if (player.gameOver()){
+            reset()
+        }
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        render()
     }
 
     /* This function initially draws the "game level", it will then call
@@ -152,6 +157,7 @@ var Engine = (function(global) {
             enemy.render();
         });
 
+
         player.render();
     }
 
@@ -160,7 +166,11 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
+        allEnemies.forEach(function(enemy) {
+            enemy.reset();
+        });
+        player.reset()
+
     }
 
     /* Go ahead and load all of the images we know we're going to need to
